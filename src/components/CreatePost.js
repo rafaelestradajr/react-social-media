@@ -1,14 +1,17 @@
-import React,{useState,useEffect} from 'react';
+import React from "react";
 
-function CreatePost({user,setPosts,posts}) {
-  const [content,setContent] = useState('');
-  const [image,setImage] = useState(null);
+function CreatePost({ user, handleAddPost }) {
+  const [content, setContent] = React.useState("");
+  const [image, setImage] = React.useState(null);
+  const imageInputRef = React.useRef();
 
   function handleSubmit(event) {
     event.preventDefault();
-    const post = {content,image,user};
-    const newPosts = [post, ...posts];
-    setPosts(newPosts);
+    const post = { content, image, user };
+    handleAddPost(post);
+    setContent("");
+    setImage(null);
+    imageInputRef.current.value = "";
   }
 
   return (
@@ -16,20 +19,20 @@ function CreatePost({user,setPosts,posts}) {
       <h1>Create New Post</h1>
       <form onSubmit={handleSubmit}>
         <input
-        type = 'text'
-        placeholder = 'Add Post Content'
-        onChange={event => setContent(event.target.value)}
+          type="text"
+          placeholder="Add Post Content"
+          onChange={event => setContent(event.target.value)}
+          value={content}
         />
-        <input 
-        type= 'file'
-        onChange={event =>setImage(event.target.files[0])}
+        <input
+          type="file"
+          onChange={event => setImage(event.target.files[0])}
+          ref={imageInputRef}
         />
-        <button type = 'submit'>Submit Post</button>
+        <button type="submit">Submit Post</button>
       </form>
-
-    
-      </div>
-  )
+    </div>
+  );
 }
 
-export default CreatePost
+export default CreatePost;
