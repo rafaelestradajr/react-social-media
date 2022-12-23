@@ -1,30 +1,25 @@
-import React,{useState,useEffect} from "react";
+import React from "react";
 
-//import { createRoot } from 'react-dom/client';
-//import * as ReactDOM from 'react-dom/client';
+function Login({ setUser }) {
+  const [username, setUsername] = React.useState("");
 
-function Login({setUser}){
- const [username,setUsername] = useState('');
- function handleSubmit(event){
+  function handleSubmit(event) {
     event.preventDefault();
     setUser(username);
+  }
 
- }
-
-    return ( <div>
-        <h2>Login</h2>
-        <form onSubmit={handleSubmit}>
-
-            <input onChange = {event => setUsername(event.target.value)} placeholder='Input username'/>
-            <button type="submit">Submit</button>
-        </form>
-        </div>
-    
-    
-    );
+  return (
+    <div>
+      <h2>Login</h2>
+      <form onSubmit={handleSubmit}>
+        <input
+          onChange={event => setUsername(event.target.value)}
+          placeholder="Input username"
+        />
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  );
 }
-
-
-
 
 export default Login;
